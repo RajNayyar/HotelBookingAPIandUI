@@ -1,0 +1,75 @@
+<!-- Tab links -->
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="tab">
+  <button class="tablinks" onclick="openCar(event, 'Car')">Cars</button>
+  <button class="tablinks" onclick="openHotel(event, 'Hotel')">Hotels</button>
+  <button class="tablinks" onclick="openFight(event, 'Flight')">Flights</button>
+</div>
+<div id = 'tab-list'>
+</div>
+<p id = "demo"></p>
+<!-- Tab content -->
+
+
+<script>
+function openCar(evt, bookingName) {
+  ParseJsonAndCreateDivs(bookingName)
+}
+
+function openHotel(evt, bookingName) {
+   ParseJsonAndCreateDivs(bookingName)
+}
+
+function ParseJsonAndCreateDivs(bookingName)
+{
+     document.getElementById('tab-list').innerHTML = "";
+    var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+       for(var i=0;i<myArr.length;i++)
+        {
+           //  document.getElementById("demo").innerHTML = myArr[i].Name + " " + myArr[i].Price ;
+           // Your existing code unmodified...
+            var iDiv = document.createElement('div');
+            iDiv.id = i;
+            iDiv.className = 'carList';
+            document.getElementById('tab-list').appendChild(iDiv);
+             var para = document.createElement("p");
+            var node = document.createTextNode("Id: "+myArr[i].Id);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("Name: "+myArr[i].Name);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].Price);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("IsSaved: "+myArr[i].IsSaved);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("IsBooked: "+myArr[i].IsBooked);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var x = document.createElement("HR");
+             iDiv.appendChild(x);
+
+        }
+    }
+};
+xmlhttp.open("GET", "http://localhost:55308/api/"+bookingName, true);
+xmlhttp.send();
+
+}
+
+</script>
+</body> 
+</html>

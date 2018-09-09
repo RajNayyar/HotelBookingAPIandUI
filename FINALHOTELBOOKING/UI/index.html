@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<p id="demo"></p>
+
+<script>
+
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+        document.getElementById("demo").innerHTML = myArr[0].Name + myArr[0].Price;
+    }
+};
+xmlhttp.open("GET", "http://localhost:55308/api/Car", true);
+xmlhttp.send();
+
+</script>
+
+
+
+</body>
+</html>
