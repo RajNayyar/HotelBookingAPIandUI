@@ -69,18 +69,70 @@ xmlhttp.onreadystatechange = function() {
             para.appendChild(node);
             iDiv.appendChild(para);
 
+            if(bookingName=="Flight")
+            {
+            var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].Source);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].Destination);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].DepartureDate);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].ArrivalDate);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].DepartureTime);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].ArrivalTime);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            }
 
-            var btn = document.createElement("BUTTON");
+           var btn = document.createElement("BUTTON");
+
+            var t;
+            if (myArr[i].IsSaved == "1") {
+            btn.className = "saved";
+            t = document.createTextNode("Saved");
+            }
+            else {
             btn.className = "save";
-            var t = document.createTextNode("Save");
+            t = document.createTextNode("Save");
+            }
             btn.appendChild(t);
+            btn.setAttribute('id',i)
             iDiv.appendChild(btn);
-
+            document.getElementById(i).addEventListener("click", function()
+            {
+            save(this.id, bookingName)
+            });
             var btn = document.createElement("BUTTON");
+            var t;
+            if (myArr[i].IsBooked == "1") {
+            btn.className = "booked";
+            t = document.createTextNode("Booked");
+            }   
+            else {
             btn.className = "book";
-            var t = document.createTextNode("Book");
+            t = document.createTextNode("Book");
+            }
             btn.appendChild(t);
+            btn.setAttribute('id',i)
             iDiv.appendChild(btn);
+            document.getElementById(i).addEventListener("click", function() {
+                debugger;
+            book(this.id, bookingName)
+
+});
 
             /*var para = document.createElement("p");
             var node = document.createTextNode("IsSaved: "+myArr[i].IsSaved);
@@ -94,6 +146,56 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "http://localhost:55308/api/"+bookingName, true);
 xmlhttp.send();
+
+}
+
+
+function save(id,product)
+
+{
+
+var xmlhttp = new XMLHttpRequest();
+
+var Arr = document.getElementById(product);
+
+object = {};
+
+object["id"]=id;
+
+object["type"]="Saved";
+
+object = JSON.stringify(object);
+console.log(object);
+xmlhttp.open("PUT", "http://localhost:55308/api/" + product, true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+xmlhttp.send(object);
+
+}
+
+function book(id, product)
+
+{
+    debugger;
+
+var xmlhttp = new XMLHttpRequest();
+
+var Arr = document.getElementById(product);
+
+object = {};
+
+object["id"]=id;
+
+object["type"]="Booked";
+
+object = JSON.stringify(object);
+
+xmlhttp.open("PUT", "http://localhost:55308/api/" + product, true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+xmlhttp.send(object);
 
 }
 

@@ -7,24 +7,31 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using HotelBooking.Models;
+using HotelBooking.Markups;
 
 namespace HotelBooking.Controllers
 {
     public class CarController : ApiController
     {
-        BookingDBEntities entity = new BookingDBEntities();
+        BookingDBEntities1 entity = new BookingDBEntities1();
         Car CarInventory = new Car();
         [HttpGet]
         public IEnumerable<Car> GetCar()
         {
-            return entity.Cars.ToList();
+            IEnumerable<Car> Cars = entity.Cars.ToList();
+            IMarkup markup = new CarStrategy();
+            foreach (Car car in Cars)
+            {
+                car.Price = markup.GetMarkup(car.Price);
+            }
+            return Cars;
         }
 
         [HttpPut]
         public void PutValues(Setters item)
         {
             
-                if (item.type == "booked")
+                if (item.type == "Booked")
                 {
 
                     entity.Cars.Find(item.id).IsBooked = "1";

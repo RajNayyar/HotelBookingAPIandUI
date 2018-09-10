@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Price" Type="int" Nullable="false" />
     <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
@@ -15,7 +15,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Price" Type="int" Nullable="false" />
     <Property Name="IsBooked" Type="varchar" MaxLength="50" Nullable="false" />
@@ -25,7 +25,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Price" Type="int" Nullable="false" />
     <Property Name="Source" Type="varchar" MaxLength="50" Nullable="false" />
@@ -39,14 +39,14 @@
   </EntityType>
   <EntityType Name="Hotel">
     <Key>
-      <PropertyRef Name="Name" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Price" Type="int" Nullable="false" />
     <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="IsBooked" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="IsSaved" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityContainer Name="BookingDBModelStoreContainer">
     <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />

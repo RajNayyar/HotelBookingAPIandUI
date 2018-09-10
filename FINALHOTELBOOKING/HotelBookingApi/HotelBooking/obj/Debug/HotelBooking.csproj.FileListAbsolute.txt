@@ -214,3 +214,6 @@ C:\Users\rnayyar\Desktop\HotelBookingAPIandUI\FINALHOTELBOOKING\HotelBookingApi\
 C:\Users\rnayyar\Desktop\HotelBookingAPIandUI\FINALHOTELBOOKING\HotelBookingApi\HotelBooking\obj\Debug\HotelBooking.csproj.CoreCompileInputs.cache
 C:\Users\rnayyar\Desktop\HotelBookingAPIandUI\FINALHOTELBOOKING\HotelBookingApi\HotelBooking\obj\Debug\HotelBooking.dll
 C:\Users\rnayyar\Desktop\HotelBookingAPIandUI\FINALHOTELBOOKING\HotelBookingApi\HotelBooking\obj\Debug\HotelBooking.pdb
+C:\Users\rnayyar\Desktop\HotelBookingAPIandUI\FINALHOTELBOOKING\HotelBookingApi\HotelBooking\bin\System.Web.Cors.dll
+C:\Users\rnayyar\Desktop\HotelBookingAPIandUI\FINALHOTELBOOKING\HotelBookingApi\HotelBooking\bin\System.Web.Http.Cors.dll
+C:\Users\rnayyar\Desktop\HotelBookingAPIandUI\FINALHOTELBOOKING\HotelBookingApi\HotelBooking\bin\System.Web.Http.Cors.xml

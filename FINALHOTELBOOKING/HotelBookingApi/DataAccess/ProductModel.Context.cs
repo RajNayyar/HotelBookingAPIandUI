@@ -13,10 +13,10 @@ namespace DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BookingDBEntities : DbContext
+    public partial class BookingDBEntities1 : DbContext
     {
-        public BookingDBEntities()
-            : base("name=BookingDBEntities")
+        public BookingDBEntities1()
+            : base("name=BookingDBEntities1")
         {
         }
     

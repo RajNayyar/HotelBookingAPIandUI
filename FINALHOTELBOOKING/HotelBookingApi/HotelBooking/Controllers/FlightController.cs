@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using HotelBooking.Markups;
 using HotelBooking.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,18 +13,24 @@ namespace HotelBooking.Controllers
 {
     public class FlightController : ApiController
     {
-        BookingDBEntities entity = new BookingDBEntities();
+        BookingDBEntities1 entity = new BookingDBEntities1();
         [HttpGet]
         public IEnumerable<Flight> GetCar()
         {
-            return entity.Flights.ToList();
+            IEnumerable<Flight> Flights = entity.Flights.ToList();
+            IMarkup markup = new AirStrategy();
+            foreach (Flight flight in Flights)
+            {
+                flight.Price = markup.GetMarkup(flight.Price);
+            }
+            return Flights;
         }
 
         [HttpPut]
         public void PutValues(Setters item)
         {
            
-                if (item.type == "booked")
+                if (item.type == "Booked")
                 {
 
                     entity.Flights.Find(item.id).IsBooked = "1";

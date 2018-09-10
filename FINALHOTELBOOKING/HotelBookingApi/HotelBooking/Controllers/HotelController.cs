@@ -7,23 +7,30 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using HotelBooking.Models;
+using HotelBooking.Markups;
 namespace HotelBooking.Controllers
 {
     public class HotelController : ApiController
     {
-        BookingDBEntities entity = new BookingDBEntities();
+        BookingDBEntities1 entity = new BookingDBEntities1();
         Hotel HotelInventory = new Hotel();
         [HttpGet]
         public IEnumerable<Hotel> GetHotel()
         {
-            return entity.Hotels.ToList();
+            IEnumerable<Hotel> hotels = entity.Hotels.ToList();
+            IMarkup markup = new HotelStrategy();
+            foreach (Hotel hotel in hotels)
+            {
+                hotel.Price = markup.GetMarkup(hotel.Price);
+            }
+            return hotels;
         }
 
         [HttpPut]
         public void PutValues(Setters item)
         {
             
-                if (item.type == "booked")
+                if (item.type == "Booked")
                 {
 
                     entity.Hotels.Find(item.id).IsBooked = "1";

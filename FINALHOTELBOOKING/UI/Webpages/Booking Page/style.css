@@ -7,7 +7,7 @@
     font-family: sans-serif;
 }
 body{
-    width: 1024px;
+    width: 100%;
     margin: 0 auto;
 }
 /* Style the buttons that are used to open the tab content */
@@ -43,7 +43,7 @@ body{
 } 
 .carList{
     display: flex;
-    width: 80%;
+    width: 100%;
     margin: 10px auto;
     justify-content: space-between;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -66,4 +66,16 @@ body{
     background-color: green;
     border: 0px;
     margin: 2px 5px;
+}
+p{
+    font-weight: lighter;
+    font-size: 20px;
+}
+.booked{
+    background-color: red;
+    color: white;
+}
+.saved{
+    background-color: grey;
+    color: white;
 }

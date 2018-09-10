@@ -7,23 +7,30 @@ using System.Web.Http;
 using HotelBooking.Models;
 using DataAccess;
 using Newtonsoft.Json.Linq;
+using HotelBooking.Markups;
 
 namespace HotelBooking.Controllers
 {
     public class ActivityController : ApiController
     {
-        BookingDBEntities entity = new BookingDBEntities();
+        BookingDBEntities1 entity = new BookingDBEntities1();
         [HttpGet]
         public IEnumerable<Activity> GetCar()
         {
-            return entity.Activities.ToList();
+            IEnumerable<Activity> Activitys = entity.Activities.ToList();
+            IMarkup markup = new ActivityStrategy();
+            foreach (Activity act in Activitys)
+            {
+                act.Price = markup.GetMarkup(act.Price);
+            }
+            return Activitys;
         }
 
         [HttpPut]
         public void PutValues(Setters item)
         {
             
-                if (item.type == "booked")
+                if (item.type == "Booked")
                 {
 
                     entity.Activities.Find(item.id).IsBooked = "1";

@@ -8,17 +8,22 @@
 	<section>
 	<div>
 		<input type="text" placeholder="Username" id="uname">
-		<input type="password" placeholder="password" id="uname">
-		<input type="submit" value="login" class="login-button" action="\Webpages\Admin-terminal\Admin.html">
+		<input type="password" placeholder="password" id="pwd">
+		<input type="submit" value="login" class="login-button" onclick="login()">
 	</div>
 </section>
 
 <script>
 	function login()
 	{
-		if(document.getElementById('text').value=="admin" && document.getElementById('pwd').value=="123")
+		debugger;
+		if(document.getElementById('uname').value=="admin" && document.getElementById('pwd').value=="123")
 		{
-			window.location = "/HotelBookingAPIandUI/FINALHOTELBOOKING/UI/Webpages/Admin-terminal.html"
+			window.location.replace("C:/Users/rnayyar/Desktop/HotelBookingAPIandUI/FINALHOTELBOOKING/UI/Webpages/Admin-terminal/Admin.html") 
+		}
+		if(document.getElementById('uname').value=="user" && document.getElementById('pwd').value=="123")
+		{
+			window.location.replace("C:/Users/rnayyar/Desktop/HotelBookingAPIandUI/FINALHOTELBOOKING/UI/Webpages/Booking Page/BookingPage.html") 
 		}
 	}
 </script>

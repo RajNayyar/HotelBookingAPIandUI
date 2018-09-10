@@ -14,38 +14,32 @@
 
 <div class = "forms">
 		<form id="Airways-Form">
-			<input type="text" placeholder="Id">
-			<input type="text" placeholder="Name">
-			<input type="text" placeholder="Price">
-			<input type="text" placeholder="Source">
-			<input type="text" placeholder="Destination">
-			<input type="text" placeholder="ArrivalDate">
-			<input type="text" placeholder="ArrivalTime">
-			<input type="text" placeholder="DepartureDate">
-			<input type="text" placeholder="DepartureTime">
-			<input type="button" name="Add" class="submit-button" value="Add">
+			<input type="text" placeholder="Name" class="Air">
+			<input type="text" placeholder="Price" class="Air">
+			<input type="text" placeholder="Source" class="Air">
+			<input type="text" placeholder="Destination" class="Air">
+			<input type="date" placeholder="DepartureDate" class="Air">
+			<input type="time" placeholder="DepartureTime" class="Air">
+			<input type="date" placeholder="ArrivalDate" class="Air">
+			<input type="time" placeholder="ArrivalTime" class="Air">
+			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethodAir('Flight')">
 		</form>
 		<form  id="Car-Form">
-			<input type="text" placeholder="Id" id="car1">
-			<input type="text" placeholder="Name" id="car2">
-			<input type="text" placeholder="Price" id="car3">
-			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethod('Car')">
+			<input type="text" placeholder="Name" class="Car">
+			<input type="text" placeholder="Price" class="Car">
+			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethodCar('Car')">
 		</form>
 		<form id="Hotel-Form">
-			<input type="text" placeholder="Id">
-			<input type="text" placeholder="Name">
-			<input type="text" placeholder="Price">
-			<input type="text" placeholder="Source">
-			<input type="text" placeholder="Location">
-			<input type="button" name="Add" class="submit-button" value="Add">
+			<input type="text" placeholder="Name" class="Hotel">
+			<input type="text" placeholder="Price" class="Hotel">
+			<input type="text" placeholder="Location" class="Hotel">
+			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethod('Hotel')">
 		</form>
 		<form id="Activity-Form">
-			<input type="text" placeholder="Id">
-			<input type="text" placeholder="Name">
-			<input type="text" placeholder="Price">
-			<input type="text" placeholder="Source">
-			<input type="text" placeholder="Location">
-			<input type="button" name="Add" class="submit-button" value="Add">
+			<input type="text" placeholder="Name" class="Activity">
+			<input type="text" placeholder="Price" class="Activity">
+			<input type="text" placeholder="Location" class="Activity">
+			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethod('Activity')">
 		</form>
 	</div>
 
@@ -120,7 +114,34 @@ xmlhttp.onreadystatechange = function() {
             var node = document.createTextNode("Price: "+myArr[i].Price);
             para.appendChild(node);
             iDiv.appendChild(para);
+              if(bookingName=="Flight")
+            {
+            var para = document.createElement("p");
+            var node = document.createTextNode("Source: "+myArr[i].Source);
+            para.appendChild(node);
+            iDiv.appendChild(para);
              var para = document.createElement("p");
+            var node = document.createTextNode("Destination: "+myArr[i].Destination);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("DepartureDate: "+myArr[i].DepartureDate);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("ArrivalDate: "+myArr[i].ArrivalDate);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("DepartureTime: "+myArr[i].DepartureTime);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("ArrivalTime: "+myArr[i].ArrivalTime);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            }
+            var para = document.createElement("p");
             var node = document.createTextNode("IsSaved: "+myArr[i].IsSaved);
             para.appendChild(node);
             iDiv.appendChild(para);
@@ -128,24 +149,22 @@ xmlhttp.onreadystatechange = function() {
             var node = document.createTextNode("IsBooked: "+myArr[i].IsBooked);
             para.appendChild(node);
             iDiv.appendChild(para);
-             var x = document.createElement("HR");
-             iDiv.appendChild(x);
 
         }
     }
 };
 xmlhttp.open("GET", "http://localhost:55308/api/"+bookingName, true);
 xmlhttp.send();
-
+location.reload();
 }
 
 function PostMethod(bookingName)
 {
-	
+	console.log(document.getElementsByClassName(bookingName)[0].value);
 	json = {
-		"Id": document.getElementById("car1").value,
-		"Name": document.getElementById("car2").value,
-		"Price": document.getElementById("car3").value,
+		"Name": document.getElementsByClassName(bookingName)[0].value,
+		"Price": document.getElementsByClassName(bookingName)[1].value,
+		"Location":document.getElementsByClassName(bookingName)[2].value,
 		"IsSaved": "0",
 		"IsBooked": "0"
 	}
@@ -156,8 +175,60 @@ xmlhttp.onreadystatechange = function() {
      console.log(this.responseText)
     }
 };
-xmlhttp.open("POST", "http://localhost:55308/api/Car", true);
-debugger;
+xmlhttp.open("POST", "http://localhost:55308/api/"+bookingName, true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+xmlhttp.send(json);
+}
+
+function PostMethodCar(bookingName)
+{
+	
+	json = {
+		"Name": document.getElementsByClassName("Car")[0].value,
+		"Price": document.getElementsByClassName("Car")[1].value,
+		"IsSaved": "0",
+		"IsBooked": "0"
+	}
+
+ json = JSON.stringify(json);
+ console.log(json);
+ var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     console.log(this.responseText)
+    }
+};
+xmlhttp.open("POST", "http://localhost:55308/api/"+bookingName, true);
+
+xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+xmlhttp.send(json);
+}
+
+function PostMethodAir(bookingName)
+{
+	
+	json = {
+		"Name": document.getElementsByClassName("Air")[0].value,
+		"Price": document.getElementsByClassName("Air")[1].value,
+		"Source":document.getElementsByClassName("Air")[2].value,
+		"Destination":document.getElementsByClassName("Air")[3].value,
+		"ArrivalDate":document.getElementsByClassName("Air")[4].value,
+		"ArrivalTime":document.getElementsByClassName("Air")[5].value,
+		"DepartureDate":document.getElementsByClassName("Air")[6].value,
+		"DepartureTime":document.getElementsByClassName("Air")[7].value,
+		"IsSaved": "0",
+		"IsBooked": "0"
+	}
+ json = JSON.stringify(json);
+ var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     console.log(this.responseText)
+    }
+};
+xmlhttp.open("POST", "http://localhost:55308/api/"+bookingName, true);
+
 xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 xmlhttp.send(json);
 }
