@@ -40,6 +40,7 @@ namespace HotelBooking.Controllers
         }
 
         [HttpPost]
+        
         public void PostCar([FromBody]JObject x)
         {
             entity.Cars.Add(x.ToObject<Car>());

@@ -1,0 +1,167 @@
+<!-- Tab links -->
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCar(event, 'Car')">Cars</button>
+  <button class="tablinks" onclick="openHotel(event, 'Hotel')">Hotels</button>
+  <button class="tablinks" onclick="openActivity(event, 'Activity')">Activity</button>
+  <button class="tablinks" onclick="openFlight(event, 'Flight')">Flights</button>
+</div>
+
+<div class = "forms">
+		<form id="Airways-Form">
+			<input type="text" placeholder="Id">
+			<input type="text" placeholder="Name">
+			<input type="text" placeholder="Price">
+			<input type="text" placeholder="Source">
+			<input type="text" placeholder="Destination">
+			<input type="text" placeholder="ArrivalDate">
+			<input type="text" placeholder="ArrivalTime">
+			<input type="text" placeholder="DepartureDate">
+			<input type="text" placeholder="DepartureTime">
+			<input type="button" name="Add" class="submit-button" value="Add">
+		</form>
+		<form  id="Car-Form">
+			<input type="text" placeholder="Id" id="car1">
+			<input type="text" placeholder="Name" id="car2">
+			<input type="text" placeholder="Price" id="car3">
+			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethod('Car')">
+		</form>
+		<form id="Hotel-Form">
+			<input type="text" placeholder="Id">
+			<input type="text" placeholder="Name">
+			<input type="text" placeholder="Price">
+			<input type="text" placeholder="Source">
+			<input type="text" placeholder="Location">
+			<input type="button" name="Add" class="submit-button" value="Add">
+		</form>
+		<form id="Activity-Form">
+			<input type="text" placeholder="Id">
+			<input type="text" placeholder="Name">
+			<input type="text" placeholder="Price">
+			<input type="text" placeholder="Source">
+			<input type="text" placeholder="Location">
+			<input type="button" name="Add" class="submit-button" value="Add">
+		</form>
+	</div>
+
+<div id = 'tab-list'>
+</div>
+<p id = "demo"></p>
+<!-- Tab content -->
+
+
+<script>
+function openCar(evt, bookingName) {
+  document.getElementById("Car-Form").style.display = "block";
+  document.getElementById("Hotel-Form").style.display = "none";
+  document.getElementById("Activity-Form").style.display = "none";
+  document.getElementById("Airways-Form").style.display = "none";
+  ParseJsonAndCreateDivs(bookingName)
+}
+
+function openHotel(evt, bookingName) {
+	document.getElementById("Car-Form").style.display = "none";
+  	document.getElementById("Hotel-Form").style.display = "block";
+  	document.getElementById("Activity-Form").style.display = "none";
+  	document.getElementById("Airways-Form").style.display = "none";
+   	ParseJsonAndCreateDivs(bookingName)
+}
+
+function openActivity(evt, bookingName)
+{
+	document.getElementById("Car-Form").style.display = "none";
+  	document.getElementById("Hotel-Form").style.display = "none";
+  	document.getElementById("Activity-Form").style.display = "block";
+  	document.getElementById("Airways-Form").style.display = "none";
+	ParseJsonAndCreateDivs(bookingName)
+}
+
+function openFlight(evt, bookingName)
+{
+	document.getElementById("Car-Form").style.display = "none";
+  	document.getElementById("Hotel-Form").style.display = "none";
+  	document.getElementById("Activity-Form").style.display = "none";
+  	document.getElementById("Airways-Form").style.display = "block";
+  	ParseJsonAndCreateDivs(bookingName)
+}
+
+function ParseJsonAndCreateDivs(bookingName)
+{
+     document.getElementById('tab-list').innerHTML = "";
+    var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+        if(myArr.length==0)
+        {
+        	alert("No Data Found")
+        	return
+        }
+            for(var i=0;i<myArr.length;i++)
+        {
+            var iDiv = document.createElement('div');
+            iDiv.id = i;
+            iDiv.className = 'carList';
+            document.getElementById('tab-list').appendChild(iDiv);
+             var para = document.createElement("p");
+            var node = document.createTextNode("Id: "+myArr[i].Id);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("Name: "+myArr[i].Name);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("Price: "+myArr[i].Price);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var para = document.createElement("p");
+            var node = document.createTextNode("IsSaved: "+myArr[i].IsSaved);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+            var para = document.createElement("p");
+            var node = document.createTextNode("IsBooked: "+myArr[i].IsBooked);
+            para.appendChild(node);
+            iDiv.appendChild(para);
+             var x = document.createElement("HR");
+             iDiv.appendChild(x);
+
+        }
+    }
+};
+xmlhttp.open("GET", "http://localhost:55308/api/"+bookingName, true);
+xmlhttp.send();
+
+}
+
+function PostMethod(bookingName)
+{
+	
+	json = {
+		"Id": document.getElementById("car1").value,
+		"Name": document.getElementById("car2").value,
+		"Price": document.getElementById("car3").value,
+		"IsSaved": "0",
+		"IsBooked": "0"
+	}
+ json = JSON.stringify(json);
+ var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     console.log(this.responseText)
+    }
+};
+xmlhttp.open("POST", "http://localhost:55308/api/Car", true);
+debugger;
+xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+xmlhttp.send(json);
+}
+
+</script>
+</body> 
+</html>

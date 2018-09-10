@@ -7,7 +7,8 @@
 <div class="tab">
   <button class="tablinks" onclick="openCar(event, 'Car')">Cars</button>
   <button class="tablinks" onclick="openHotel(event, 'Hotel')">Hotels</button>
-  <button class="tablinks" onclick="openFight(event, 'Flight')">Flights</button>
+   <button class="tablinks" onclick="openActivity(event, 'Activity')">Activity</button>
+  <button class="tablinks" onclick="openFlight(event, 'Flight')">Flights</button>
 </div>
 <div id = 'tab-list'>
 </div>
@@ -18,11 +19,22 @@
 <script>
 function openCar(evt, bookingName) {
   ParseJsonAndCreateDivs(bookingName)
+
 }
 
 function openHotel(evt, bookingName) {
    ParseJsonAndCreateDivs(bookingName)
 }
+function openActivity(evt, bookingName)
+{
+    ParseJsonAndCreateDivs(bookingName)
+}
+
+function openFlight(evt, bookingName)
+{
+    ParseJsonAndCreateDivs(bookingName)
+}
+
 
 function ParseJsonAndCreateDivs(bookingName)
 {
@@ -31,6 +43,11 @@ function ParseJsonAndCreateDivs(bookingName)
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var myArr = JSON.parse(this.responseText);
+        if(myArr.length==0)
+        {
+            alert("No Data Found")
+            return
+        }
        for(var i=0;i<myArr.length;i++)
         {
            //  document.getElementById("demo").innerHTML = myArr[i].Name + " " + myArr[i].Price ;
@@ -51,16 +68,26 @@ xmlhttp.onreadystatechange = function() {
             var node = document.createTextNode("Price: "+myArr[i].Price);
             para.appendChild(node);
             iDiv.appendChild(para);
-             var para = document.createElement("p");
+
+
+            var btn = document.createElement("BUTTON");
+            btn.className = "save";
+            var t = document.createTextNode("Save");
+            btn.appendChild(t);
+            iDiv.appendChild(btn);
+
+            var btn = document.createElement("BUTTON");
+            btn.className = "book";
+            var t = document.createTextNode("Book");
+            btn.appendChild(t);
+            iDiv.appendChild(btn);
+
+            /*var para = document.createElement("p");
             var node = document.createTextNode("IsSaved: "+myArr[i].IsSaved);
             para.appendChild(node);
             iDiv.appendChild(para);
             var para = document.createElement("p");
-            var node = document.createTextNode("IsBooked: "+myArr[i].IsBooked);
-            para.appendChild(node);
-            iDiv.appendChild(para);
-             var x = document.createElement("HR");
-             iDiv.appendChild(x);
+            var node = document.createTextNode("IsBooked: "+myArr[i].IsBooked);*/
 
         }
     }

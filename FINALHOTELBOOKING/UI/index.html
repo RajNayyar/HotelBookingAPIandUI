@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	</head>
 <body>
-
-
-
-<p id="demo"></p>
+	<img src="https://2bjee8bvp8y263sjpl3xui1a-wpengine.netdna-ssl.com/wp-content/uploads/tavisca.png">
+	<section>
+	<div>
+		<input type="text" placeholder="Username" id="uname">
+		<input type="password" placeholder="password" id="uname">
+		<input type="submit" value="login" class="login-button" action="\Webpages\Admin-terminal\Admin.html">
+	</div>
+</section>
 
 <script>
-
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var myArr = JSON.parse(this.responseText);
-        document.getElementById("demo").innerHTML = myArr[0].Name + myArr[0].Price;
-    }
-};
-xmlhttp.open("GET", "http://localhost:55308/api/Car", true);
-xmlhttp.send();
-
+	function login()
+	{
+		if(document.getElementById('text').value=="admin" && document.getElementById('pwd').value=="123")
+		{
+			window.location = "/HotelBookingAPIandUI/FINALHOTELBOOKING/UI/Webpages/Admin-terminal.html"
+		}
+	}
 </script>
-
-
-
 </body>
 </html>

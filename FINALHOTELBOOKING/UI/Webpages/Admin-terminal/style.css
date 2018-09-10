@@ -54,16 +54,32 @@ body{
     margin: 20px auto;
 
 }
-.save{
-    color: white;
-    background-color: #4169e1;
-    border: 0px;
-    margin: 2px 5px;
+#Airways-Form{
+	display: none;
 }
-.book
-{
-    color: white;
-    background-color: green;
-    border: 0px;
-    margin: 2px 5px;
+#Activity-Form{
+	display: none;
+}
+#Hotel-Form{
+	display: none;
+}
+#Car-Form{
+	display: none;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	text-align: center;
+}
+input{
+	font-size: 20px;
+	margin: 10px auto;
+	width: 600px;
+}
+.submit-button{
+	background-color: green;
+	font-size: 30px;
+	color: white;
 }
