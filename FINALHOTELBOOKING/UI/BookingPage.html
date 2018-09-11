@@ -1,7 +1,7 @@
 <!-- Tab links -->
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body>
 <div class="tab">
@@ -72,27 +72,27 @@ xmlhttp.onreadystatechange = function() {
             if(bookingName=="Flight")
             {
             var para = document.createElement("p");
-            var node = document.createTextNode("Price: "+myArr[i].Source);
+            var node = document.createTextNode("Source: "+myArr[i].Source);
             para.appendChild(node);
             iDiv.appendChild(para);
              var para = document.createElement("p");
-            var node = document.createTextNode("Price: "+myArr[i].Destination);
+            var node = document.createTextNode("Destination: "+myArr[i].Destination);
             para.appendChild(node);
             iDiv.appendChild(para);
              var para = document.createElement("p");
-            var node = document.createTextNode("Price: "+myArr[i].DepartureDate);
+            var node = document.createTextNode("DepartureDate: "+myArr[i].DepartureDate);
             para.appendChild(node);
             iDiv.appendChild(para);
              var para = document.createElement("p");
-            var node = document.createTextNode("Price: "+myArr[i].ArrivalDate);
+            var node = document.createTextNode("ArrivalDate: "+myArr[i].ArrivalDate);
             para.appendChild(node);
             iDiv.appendChild(para);
             var para = document.createElement("p");
-            var node = document.createTextNode("Price: "+myArr[i].DepartureTime);
+            var node = document.createTextNode("DepartureTime: "+myArr[i].DepartureTime);
             para.appendChild(node);
             iDiv.appendChild(para);
              var para = document.createElement("p");
-            var node = document.createTextNode("Price: "+myArr[i].ArrivalTime);
+            var node = document.createTextNode("ArrivalTime: "+myArr[i].ArrivalTime);
             para.appendChild(node);
             iDiv.appendChild(para);
             }
@@ -110,11 +110,9 @@ xmlhttp.onreadystatechange = function() {
             }
             btn.appendChild(t);
             btn.setAttribute('id',i)
+            btn.setAttribute('onclick','save('+myArr[i].Id+',\"'+bookingName+'\")');
             iDiv.appendChild(btn);
-            document.getElementById(i).addEventListener("click", function()
-            {
-            save(this.id, bookingName)
-            });
+           
             var btn = document.createElement("BUTTON");
             var t;
             if (myArr[i].IsBooked == "1") {
@@ -127,19 +125,8 @@ xmlhttp.onreadystatechange = function() {
             }
             btn.appendChild(t);
             btn.setAttribute('id',i)
+            btn.setAttribute('onclick','book('+myArr[i].Id+',\"'+bookingName+'\")');
             iDiv.appendChild(btn);
-            document.getElementById(i).addEventListener("click", function() {
-                debugger;
-            book(this.id, bookingName)
-
-});
-
-            /*var para = document.createElement("p");
-            var node = document.createTextNode("IsSaved: "+myArr[i].IsSaved);
-            para.appendChild(node);
-            iDiv.appendChild(para);
-            var para = document.createElement("p");
-            var node = document.createTextNode("IsBooked: "+myArr[i].IsBooked);*/
 
         }
     }
@@ -150,13 +137,13 @@ xmlhttp.send();
 }
 
 
-function save(id,product)
+function save(id,bookingName)
 
 {
 
 var xmlhttp = new XMLHttpRequest();
 
-var Arr = document.getElementById(product);
+var Arr = document.getElementById(bookingName);
 
 object = {};
 
@@ -166,22 +153,22 @@ object["type"]="Saved";
 
 object = JSON.stringify(object);
 console.log(object);
-xmlhttp.open("PUT", "http://localhost:55308/api/" + product, true);
+xmlhttp.open("PUT", "http://localhost:55308/api/" + bookingName, true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 
 xmlhttp.send(object);
 
+alert("Saved! Refresh the page to see changes")
 }
 
-function book(id, product)
+function book(id, bookingName)
 
 {
-    debugger;
 
 var xmlhttp = new XMLHttpRequest();
 
-var Arr = document.getElementById(product);
+var Arr = document.getElementById(bookingName);
 
 object = {};
 
@@ -191,12 +178,12 @@ object["type"]="Booked";
 
 object = JSON.stringify(object);
 
-xmlhttp.open("PUT", "http://localhost:55308/api/" + product, true);
+xmlhttp.open("PUT", "http://localhost:55308/api/" + bookingName, true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 
 xmlhttp.send(object);
-
+alert("booked! Refresh the page to see changes")
 }
 
 </script>

@@ -1,7 +1,7 @@
 <!-- Tab links -->
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
 
@@ -13,34 +13,44 @@
 </div>
 
 <div class = "forms">
-		<form id="Airways-Form">
+	<div id="Airways-Form">
+		
 			<input type="text" placeholder="Name" class="Air">
 			<input type="text" placeholder="Price" class="Air">
 			<input type="text" placeholder="Source" class="Air">
 			<input type="text" placeholder="Destination" class="Air">
+      <br><label>Departure Date:</label><br>
 			<input type="date" placeholder="DepartureDate" class="Air">
+      <br><label>Departure Time:</label><br>
 			<input type="time" placeholder="DepartureTime" class="Air">
+      <br><label>Arrival Date:</label><br>
 			<input type="date" placeholder="ArrivalDate" class="Air">
+      <br><label>Arrival Time:</label><br>
 			<input type="time" placeholder="ArrivalTime" class="Air">
-			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethodAir('Flight')">
-		</form>
-		<form  id="Car-Form">
+			
+		
+		<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethodAir('Flight')">
+	</div>
+		<div  id="Car-Form">
 			<input type="text" placeholder="Name" class="Car">
 			<input type="text" placeholder="Price" class="Car">
 			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethodCar('Car')">
-		</form>
-		<form id="Hotel-Form">
+		</div>
+		
+		<div id="Hotel-Form">
 			<input type="text" placeholder="Name" class="Hotel">
 			<input type="text" placeholder="Price" class="Hotel">
 			<input type="text" placeholder="Location" class="Hotel">
 			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethod('Hotel')">
-		</form>
-		<form id="Activity-Form">
+		</div>
+		
+		<div id="Activity-Form">
 			<input type="text" placeholder="Name" class="Activity">
 			<input type="text" placeholder="Price" class="Activity">
 			<input type="text" placeholder="Location" class="Activity">
-			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethod('Activity')">
-		</form>
+			<input type="button" name="Add" class="submit-button" value="Add" onclick="PostMethod('Activity')">	
+		</div>
+		
 	</div>
 
 <div id = 'tab-list'>
@@ -155,7 +165,7 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "http://localhost:55308/api/"+bookingName, true);
 xmlhttp.send();
-location.reload();
+
 }
 
 function PostMethod(bookingName)
@@ -179,6 +189,7 @@ xmlhttp.open("POST", "http://localhost:55308/api/"+bookingName, true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 xmlhttp.send(json);
+alert("Successful, REFRESH the page!")
 }
 
 function PostMethodCar(bookingName)
@@ -203,6 +214,7 @@ xmlhttp.open("POST", "http://localhost:55308/api/"+bookingName, true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 xmlhttp.send(json);
+alert("Successful, REFRESH the page!")
 }
 
 function PostMethodAir(bookingName)
@@ -231,6 +243,7 @@ xmlhttp.open("POST", "http://localhost:55308/api/"+bookingName, true);
 
 xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 xmlhttp.send(json);
+alert("Successful, REFRESH the page!")
 }
 
 </script>

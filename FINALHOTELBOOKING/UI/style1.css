@@ -6,9 +6,15 @@
     font-weight: lighter;
     font-family: sans-serif;
 }
+label{
+   border-bottom: 1px solid;
+}
+
 body{
     width: 100%;
     margin: 0 auto;
+    font-weight: lighter;
+    font-family: sans-serif;
 }
 /* Style the buttons that are used to open the tab content */
 .tab button {
@@ -54,28 +60,41 @@ body{
     margin: 20px auto;
 
 }
-.save{
-    color: white;
-    background-color: #4169e1;
-    border: 0px;
-    margin: 2px 5px;
+#Airways-Form{
+	display: none;
+	width:1024px;
 }
-.book
-{
-    color: white;
-    background-color: green;
-    border: 0px;
-    margin: 2px 5px;
+#Activity-Form{
+	display: none;
+	width:1024px;
 }
-p{
-    font-weight: lighter;
-    font-size: 20px;
+#Hotel-Form{
+	display: none;
+	width:1024px;
 }
-.booked{
-    background-color: red;
-    color: white;
+#Car-Form{
+	display: none;
+	width:1024px;
 }
-.saved{
-    background-color: grey;
-    color: white;
+
+form {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	text-align: center;
+}
+input{
+	font-size: 20px;
+	margin: 10px auto;
+	width: 600px;
+}
+.submit-button{
+	background-color: green;
+	font-size: 30px;
+	color: white;
+}
+.forms{
+	width: 1024px;
+	text-align: center;
+	margin: 0 auto;
 }
